@@ -12,17 +12,25 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Transaction {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long id; 
 	
 	@Column(nullable = false)
-	private String accountFrom;
+	private String accountFrom; 
 	
 	@Column(nullable = false)
-	private String accountTo;
+	private String accountTo; 
 	
+	@Column(nullable = false)
+	private String operationType; 
+	
+	@Column(nullable = false)
+	private double amount; 
+	
+	@Temporal(TemporalType.DATE)
+	private Date dateOfTransaction;
+
 	public Long getId() {
 		return id;
 	}
@@ -47,6 +55,14 @@ public class Transaction {
 		this.accountTo = accountTo;
 	}
 
+	public String getOperationType() {
+		return operationType;
+	}
+
+	public void setOperationType(String operationType) {
+		this.operationType = operationType;
+	}
+
 	public double getAmount() {
 		return amount;
 	}
@@ -61,24 +77,7 @@ public class Transaction {
 
 	public void setDateOfTransaction(Date dateOfTransaction) {
 		this.dateOfTransaction = dateOfTransaction;
-	}
-
-	public String getOperationType() {
-		return operationType;
-	}
-
-	public void setOperationType(String operationType) {
-		this.operationType = operationType;
-	}
-
-	@Column(nullable = false)
-	private double amount;
-	
-	@Temporal(TemporalType.DATE)
-	private Date dateOfTransaction;
-	
-	@Column(nullable = false)
-	private String operationType;
+	} 
 	
 	
 }
