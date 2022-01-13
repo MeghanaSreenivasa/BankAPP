@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springboot.bankapp.model.Account;
+import com.springboot.bankapp.model.Help;
 import com.springboot.bankapp.model.Transaction;
+import com.springboot.bankapp.repository.HelpRepository;
 import com.springboot.bankapp.repository.TransactionRepository;
 import com.springboot.bankapp.repository.UserRepository;
 
@@ -17,6 +20,9 @@ public class TransactionService {
 	
 	@Autowired
 	private TransactionRepository transactionRepository;
+	
+	@Autowired
+	private HelpRepository helpRepository;
 	
 	public String fetchFromAccountNumber(String username) {
 		 
@@ -44,4 +50,28 @@ public class TransactionService {
 		 
 		return transactionRepository.fetchTransactionsByAccountNumber(accountNumber);
 	}
+
+
+	public Account getAccountByAccountNumber(String accountNumber) {
+		
+		return transactionRepository.getAccountByAccountNumber(accountNumber);
+	}
+
+
+	public void depositAmount(String accountNumber, double amount) {
+		transactionRepository.depositAmount(accountNumber, amount);
+	}
+
+	public Help postQnA(Help help)
+	{
+		help.setQuestion(help.getQuestion());
+		help.setAnswer(help.getAnswer());
+		return helpRepository.save(help);
+	}
+	
+	public Help getQnA(Long id)
+	{
+		return transactionRepository.getQnA(id);
+	}
+	
 }
